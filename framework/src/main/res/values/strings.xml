@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="framework_text_error_reading_file">terjadi kesalahan dalam membaca file portofolio.json</string>
+  <string name="framework_text_error_no_balance_found">tidak ada saldo yang terbaca!</string>
+  <string name="framework_text_failed_get_balance">gagal membaca saldo</string>
+  <string name="framework_text_failed_update_balance">gagal memperbaharui saldo</string>
+  <string name="framework_text_failed_post_transaction">gagal melakukan transaksi</string>
+  <string name="framework_text_failed_get_transaction">gagal membaca data transaksi</string>
+  <string name="framework_text_failed_reset_balance">gagal me-reset saldo</string>
+  <string name="framework_text_failed_reset_data">gagal me-reset data</string>
+</resources>

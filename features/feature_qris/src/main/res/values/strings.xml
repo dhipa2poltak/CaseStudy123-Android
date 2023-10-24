@@ -1,0 +1,16 @@
+<resources>
+  <string name="qris_title_window">Transaksi QRIS</string>
+  <string name="qris_text_name_of_merchant">Nama Merchant:</string>
+  <string name="qris_text_transaction_nominal">Nominal Transaksi:</string>
+  <string name="qris_text_transaction_id">ID Transaksi:</string>
+
+  <string name="qris_text_not_enough_balance">Saldo Anda tidak cukup!</string>
+  <string name="qris_text_your_balance">Saldo Anda: %1$s</string>
+  <string name="qris_text_transaction_success">Transaksi Berhasil!</string>
+  <string name="qris_text_ending_balance">Saldo Akhir: %1$s</string>
+
+  <string name="qris_text_pay">Bayar</string>
+  <string name="qris_text_done">Selesai</string>
+
+  <string name="qris_text_no_data">tidak ada data</string>
+</resources>

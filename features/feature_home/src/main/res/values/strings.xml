@@ -1,0 +1,11 @@
+<resources>
+  <string name="home_text_balance">Saldo:</string>
+
+  <string name="home_text_qris">QRIS</string>
+  <string name="home_text_history">Riwayat</string>
+  <string name="home_text_chart">Chart</string>
+
+  <string name="home_text_scan_qr_code">Scan a QR Code</string>
+  <string name="home_text_cancel">Dibatalkan</string>
+  <string name="home_text_invalid_code">Kode tidak valid!</string>
+</resources>

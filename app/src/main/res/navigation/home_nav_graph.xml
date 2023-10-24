@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+  <fragment
+      android:id="@+id/homeFragment"
+      android:name="com.dpfht.android.casestudy123.feature_home.HomeFragment" />
+
+  <fragment
+      android:id="@+id/qrisHistoryFragment"
+      android:name="com.dpfht.android.casestudy123.feature_qris.history.QRISHistoryFragment">
+
+    <deepLink
+        app:uri="android-app://com.dpfht.android.casestudy123/qris_history_fragment" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/portofolioFragment"
+      android:name="com.dpfht.android.casestudy123.feature_portofolio.PortofolioFragment">
+
+    <deepLink
+        app:uri="android-app://com.dpfht.android.casestudy123/portofolio_fragment" />
+
+  </fragment>
+
+  <dialog
+      android:id="@+id/errorMessageDialogFragment"
+      android:name="com.dpfht.android.casestudy123.feature_error_message.ErrorMessageDialogFragment"
+      tools:layout="@layout/fragment_error_message_dialog">
+
+    <deepLink
+        app:uri="android-app://com.dpfht.android.casestudy123/error_message_dialog_fragment?message={message}" />
+
+    <argument
+        android:name="message"
+        android:defaultValue="no message"
+        app:argType="string"  />
+  </dialog>
+</navigation>
