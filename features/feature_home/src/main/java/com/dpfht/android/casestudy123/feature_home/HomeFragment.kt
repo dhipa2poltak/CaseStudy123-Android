@@ -48,6 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     binding.gvAction.adapter = actionAdapter
 
     observeViewModel()
+    setListener()
 
     viewModel.start()
   }
@@ -61,6 +62,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
       if (message.isNotEmpty()) {
         navigationService.navigateToErrorMessage(message)
       }
+    }
+
+    viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
+      binding.swRefreshHome.isRefreshing = isRefreshing
+    }
+  }
+
+  private fun setListener() {
+    binding.swRefreshHome.setOnRefreshListener {
+      viewModel.start()
     }
   }
 

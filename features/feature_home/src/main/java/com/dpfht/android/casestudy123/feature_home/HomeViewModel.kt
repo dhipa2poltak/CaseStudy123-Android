@@ -24,11 +24,15 @@ class HomeViewModel @Inject constructor(
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> = _errorMessage
 
+  private val _isRefreshing = MutableLiveData<Boolean>()
+  val isRefreshing: LiveData<Boolean> = _isRefreshing
+
   fun start() {
     getBalance()
   }
 
   private fun getBalance() {
+    _isRefreshing.postValue(true)
     viewModelScope.launch {
       when (val result = getBalanceUseCase()) {
         is Result.Success -> {
@@ -42,10 +46,12 @@ class HomeViewModel @Inject constructor(
   }
 
   private fun onSuccessGetBalance(balance: Double) {
+    _isRefreshing.postValue(false)
     _balance.postValue(balance)
   }
 
   private fun onErrorGetBalance(message: String) {
+    _isRefreshing.postValue(false)
     _errorMessage.postValue(message)
   }
 
