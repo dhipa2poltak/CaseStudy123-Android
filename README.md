@@ -10,7 +10,7 @@
 
 **QR Code Sample:**
 <p align="center">
-  <img src="docs/qr_code_sample.jpg">
+  <img src="docs/qr_code_sample.png">
 </p>
 
 **Technology Stack:**
