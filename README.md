@@ -5,9 +5,6 @@
 | --------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
 | <img src="docs/screenshots/transaction_failed.jpg"> | <img src="docs/screenshots/history.jpg">          | <img src="docs/screenshots/chart.jpg">               |
 
-**APK file:**
-**[Case Study 123 v1.2.apk](https://drive.google.com/file/d/1tXWUVuYLnejEPnpHXIUIYUQMXGjoImnT/view?usp=sharing)**
-
 **QR Code Sample:**
 <p align="center">
   <img src="docs/qr_code_sample.png">
