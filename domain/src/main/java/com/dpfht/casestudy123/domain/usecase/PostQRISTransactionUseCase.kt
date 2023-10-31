@@ -6,5 +6,5 @@ import com.dpfht.casestudy123.domain.entity.Result
 
 interface PostQRISTransactionUseCase {
 
-  suspend operator fun invoke(entity: QRCodeEntity): Result<QRISTransactionState>
+  suspend operator fun invoke(qrEntity: QRCodeEntity): Result<QRISTransactionState>
 }

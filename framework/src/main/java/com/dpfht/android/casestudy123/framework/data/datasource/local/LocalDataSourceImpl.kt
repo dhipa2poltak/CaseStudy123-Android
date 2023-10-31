@@ -7,11 +7,11 @@ import com.dpfht.android.casestudy123.framework.R
 import com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio.TrxChartAssetModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio.toDomain
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.db.AppDB
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDBModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDBModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.toDomain
 import com.dpfht.casestudy123.data.datasource.LocalDataSource
 import com.dpfht.casestudy123.domain.entity.QRCodeEntity
-import com.dpfht.casestudy123.domain.entity.QRISTransactionState
 import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
@@ -90,59 +90,36 @@ class LocalDataSourceImpl(
     }
   }
 
-  override suspend fun postQRISTransaction(entity: QRCodeEntity): QRISTransactionState {
+  override suspend fun postQRISTransaction(balanceEntity: BalanceEntity, qrEntity: QRCodeEntity) {
     try {
-      val balanceModel = withContext(Dispatchers.IO) {
-        appDB.balanceDao().getBalance("balance").firstOrNull()
-      }
+      withContext(Dispatchers.IO) {
+        appDB.beginTransaction()
 
-      val theBalance = balanceModel?.balance ?: 0.0
+        try {
+          val newBalanceModel = BalanceDBModel(id = balanceEntity.id, type = balanceEntity.type, balance = balanceEntity.balance)
+          val count = appDB.balanceDao().updateBalance(newBalanceModel)
 
-      if (theBalance == 0.0 && entity.nominal > 0.0) {
-        return QRISTransactionState.NotEnoughBalance(theBalance)
-      }
+          if (count > 0) {
+            val newQRISTransaction = QRISTransactionDBModel(
+              source = qrEntity.source,
+              idTransaction = qrEntity.idTransaction,
+              merchantName = qrEntity.merchantName,
+              nominal = qrEntity.nominal,
+              transactionDateTime = Calendar.getInstance().time
+            )
+            appDB.qrisTransactionDao().insertQRISTransaction(newQRISTransaction)
 
-      val newBalance = theBalance - entity.nominal
-      if (newBalance < 0) {
-        return QRISTransactionState.NotEnoughBalance(theBalance)
-      }
-
-      if (balanceModel != null) {
-        val result = withContext(Dispatchers.IO) {
-          appDB.beginTransaction()
-
-          try {
-            val newBalanceModel = balanceModel.copy(balance = newBalance)
-            val count = appDB.balanceDao().updateBalance(newBalanceModel)
-
-            if (count > 0) {
-              val newQRISTransaction = QRISTransactionDBModel(
-                source = entity.source,
-                idTransaction = entity.idTransaction,
-                merchantName = entity.merchantName,
-                nominal = entity.nominal,
-                transactionDateTime = Calendar.getInstance().time
-              )
-              appDB.qrisTransactionDao().insertQRISTransaction(newQRISTransaction)
-
-              appDB.setTransactionSuccessful()
-            } else {
-              throw Exception(context.getString(R.string.framework_text_failed_update_balance))
-            }
-          } catch (e: Exception) {
-            e.printStackTrace()
-            throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
-          } finally {
-            appDB.endTransaction()
+            appDB.setTransactionSuccessful()
+          } else {
+            throw Exception(context.getString(R.string.framework_text_failed_update_balance))
           }
-
-          QRISTransactionState.Success(newBalance)
+        } catch (e: Exception) {
+          e.printStackTrace()
+          throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
+        } finally {
+          appDB.endTransaction()
         }
-
-        return result
       }
-
-      throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
     } catch (e: Exception) {
       e.printStackTrace()
       throw Exception(context.getString(R.string.framework_text_failed_post_transaction))

@@ -19,6 +19,7 @@ data class BalanceDBModel(
 
 fun BalanceDBModel.toDomain(): BalanceEntity {
   return BalanceEntity(
+    id = this.id ?: 0,
     type = this.type ?: "",
     balance = this.balance ?: 0.0
   )
