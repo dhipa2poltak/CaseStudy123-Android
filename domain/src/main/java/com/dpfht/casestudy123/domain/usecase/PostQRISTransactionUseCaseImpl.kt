@@ -10,6 +10,10 @@ class PostQRISTransactionUseCaseImpl(
 ): PostQRISTransactionUseCase {
 
   override suspend operator fun invoke(entity: QRCodeEntity): Result<QRISTransactionState> {
-    return appRepository.postQRISTransaction(entity)
+    return try {
+      Result.Success(appRepository.postQRISTransaction(entity))
+    } catch (e: Exception) {
+      Result.ErrorResult(e.message ?: "")
+    }
   }
 }

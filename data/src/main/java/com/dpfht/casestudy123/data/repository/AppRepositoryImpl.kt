@@ -3,8 +3,6 @@ package com.dpfht.casestudy123.data.repository
 import com.dpfht.casestudy123.data.datasource.LocalDataSource
 import com.dpfht.casestudy123.domain.entity.QRCodeEntity
 import com.dpfht.casestudy123.domain.entity.QRISTransactionState
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.VoidResult
 import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
@@ -15,7 +13,7 @@ class AppRepositoryImpl(
   private val localDataSource: LocalDataSource
 ): AppRepository {
 
-  override suspend fun getPortofolios(): Result<List<TrxChartEntity>> {
+  override suspend fun getPortofolios(): List<TrxChartEntity> {
     return localDataSource.getPortofolios()
   }
 
@@ -23,19 +21,19 @@ class AppRepositoryImpl(
     return localDataSource.getStreamIsDBInitialized()
   }
 
-  override suspend fun getBalance(): Result<BalanceEntity> {
+  override suspend fun getBalance(): BalanceEntity {
     return localDataSource.getBalance()
   }
 
-  override suspend fun postQRISTransaction(entity: QRCodeEntity): Result<QRISTransactionState> {
+  override suspend fun postQRISTransaction(entity: QRCodeEntity): QRISTransactionState {
     return localDataSource.postQRISTransaction(entity)
   }
 
-  override suspend fun getAllQRISTransaction(): Result<List<QRISTransactionEntity>> {
+  override suspend fun getAllQRISTransaction(): List<QRISTransactionEntity> {
     return localDataSource.getAllQRISTransaction()
   }
 
-  override suspend fun resetAllData(): VoidResult {
+  override suspend fun resetAllData() {
     return localDataSource.resetAllData()
   }
 }

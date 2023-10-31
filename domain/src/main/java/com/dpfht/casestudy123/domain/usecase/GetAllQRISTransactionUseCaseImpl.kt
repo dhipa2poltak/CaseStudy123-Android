@@ -9,6 +9,10 @@ class GetAllQRISTransactionUseCaseImpl(
 ): GetAllQRISTransactionUseCase {
 
   override suspend operator fun invoke(): Result<List<QRISTransactionEntity>> {
-    return appRepository.getAllQRISTransaction()
+    return try {
+      Result.Success(appRepository.getAllQRISTransaction())
+    } catch (e: Exception) {
+      Result.ErrorResult(e.message ?: "")
+    }
   }
 }

@@ -9,6 +9,10 @@ class GetBalanceUseCaseImpl(
 ): GetBalanceUseCase {
 
   override suspend operator fun invoke(): Result<BalanceEntity> {
-    return appRepository.getBalance()
+    return try {
+      Result.Success(appRepository.getBalance())
+    } catch (e: Exception) {
+      Result.ErrorResult(e.message ?: "")
+    }
   }
 }

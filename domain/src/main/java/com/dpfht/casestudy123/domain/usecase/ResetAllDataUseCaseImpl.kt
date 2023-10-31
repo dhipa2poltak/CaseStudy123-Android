@@ -8,6 +8,12 @@ class ResetAllDataUseCaseImpl(
 ): ResetAllDataUseCase {
 
   override suspend operator fun invoke(): VoidResult {
-    return appRepository.resetAllData()
+    return try {
+      appRepository.resetAllData()
+
+      VoidResult.Success
+    } catch (e: Exception) {
+      VoidResult.Error(e.message ?: "")
+    }
   }
 }

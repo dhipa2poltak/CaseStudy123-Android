@@ -9,6 +9,10 @@ class GetPortofoliosUseCaseImpl(
 ): GetPortofoliosUseCase {
 
   override suspend operator fun invoke(): Result<List<TrxChartEntity>> {
-    return appRepository.getPortofolios()
+    return try {
+      Result.Success(appRepository.getPortofolios())
+    } catch (e: Exception) {
+      Result.ErrorResult(e.message ?: "")
+    }
   }
 }

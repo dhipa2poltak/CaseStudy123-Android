@@ -12,8 +12,6 @@ import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model
 import com.dpfht.casestudy123.data.datasource.LocalDataSource
 import com.dpfht.casestudy123.domain.entity.QRCodeEntity
 import com.dpfht.casestudy123.domain.entity.QRISTransactionState
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.VoidResult
 import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
@@ -45,7 +43,7 @@ class LocalDataSourceImpl(
     return AppDB.obsIsDBInitialized
   }
 
-  override suspend fun getPortofolios(): Result<List<TrxChartEntity>> {
+  override suspend fun getPortofolios(): List<TrxChartEntity> {
     return withContext(Dispatchers.IO) {
       var text = ""
 
@@ -60,7 +58,7 @@ class LocalDataSourceImpl(
         }
       } catch (e: Exception) {
         e.printStackTrace()
-        return@withContext Result.ErrorResult(e.message ?: context.getString(R.string.framework_text_error_reading_file))
+        throw Exception(e.message ?: context.getString(R.string.framework_text_error_reading_file))
       } finally {
         if (reader != null) {
           try {
@@ -74,30 +72,26 @@ class LocalDataSourceImpl(
       val typeTokenCity = object : TypeToken<List<TrxChartAssetModel>>() {}.type
       val trxChartAsset = Gson().fromJson<List<TrxChartAssetModel>>(text, typeTokenCity)
 
-      Result.Success(trxChartAsset.map { it.toDomain() })
+      trxChartAsset.map { it.toDomain() }
     }
   }
 
-  override suspend fun getBalance(): Result<BalanceEntity> {
-    return try {
+  override suspend fun getBalance(): BalanceEntity {
+    try {
       val entity = withContext(Dispatchers.IO) {
         val list = appDB.balanceDao().getBalance("balance").map { it.toDomain() }
         list.firstOrNull()
       }
 
-      return if (entity != null) {
-        Result.Success(entity)
-      } else {
-        Result.ErrorResult(context.getString(R.string.framework_text_error_no_balance_found))
-      }
+      return entity ?: throw Exception(context.getString(R.string.framework_text_error_no_balance_found))
     } catch (e: Exception) {
       e.printStackTrace()
-      Result.ErrorResult(context.getString(R.string.framework_text_failed_get_balance))
+      throw Exception(context.getString(R.string.framework_text_failed_get_balance))
     }
   }
 
-  override suspend fun postQRISTransaction(entity: QRCodeEntity): Result<QRISTransactionState> {
-    return try {
+  override suspend fun postQRISTransaction(entity: QRCodeEntity): QRISTransactionState {
+    try {
       val balanceModel = withContext(Dispatchers.IO) {
         appDB.balanceDao().getBalance("balance").firstOrNull()
       }
@@ -105,12 +99,12 @@ class LocalDataSourceImpl(
       val theBalance = balanceModel?.balance ?: 0.0
 
       if (theBalance == 0.0 && entity.nominal > 0.0) {
-        return Result.Success(QRISTransactionState.NotEnoughBalance(theBalance))
+        return QRISTransactionState.NotEnoughBalance(theBalance)
       }
 
       val newBalance = theBalance - entity.nominal
       if (newBalance < 0) {
-        return Result.Success(QRISTransactionState.NotEnoughBalance(theBalance))
+        return QRISTransactionState.NotEnoughBalance(theBalance)
       }
 
       if (balanceModel != null) {
@@ -142,35 +136,35 @@ class LocalDataSourceImpl(
             appDB.endTransaction()
           }
 
-          Result.Success(QRISTransactionState.Success(newBalance))
+          QRISTransactionState.Success(newBalance)
         }
 
         return result
       }
 
-      Result.ErrorResult(context.getString(R.string.framework_text_failed_post_transaction))
+      throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
     } catch (e: Exception) {
       e.printStackTrace()
-      Result.ErrorResult(context.getString(R.string.framework_text_failed_post_transaction))
+      throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
     }
   }
 
-  override suspend fun getAllQRISTransaction(): Result<List<QRISTransactionEntity>> {
+  override suspend fun getAllQRISTransaction(): List<QRISTransactionEntity> {
     return try {
       val entities = withContext(Dispatchers.IO) {
         appDB.qrisTransactionDao().getAllQRISTransaction().map { it.toDomain() }
       }
 
-      Result.Success(entities)
+      entities
     } catch (e: Exception) {
       e.printStackTrace()
-      Result.ErrorResult(context.getString(R.string.framework_text_failed_get_transaction))
+      throw Exception(context.getString(R.string.framework_text_failed_get_transaction))
     }
   }
 
-  override suspend fun resetAllData(): VoidResult {
-    return try {
-      val result = withContext(Dispatchers.IO) {
+  override suspend fun resetAllData() {
+    try {
+      withContext(Dispatchers.IO) {
         appDB.beginTransaction()
 
         try {
@@ -192,14 +186,10 @@ class LocalDataSourceImpl(
         } finally {
           appDB.endTransaction()
         }
-
-        VoidResult.Success
       }
-
-      result
     } catch (e: Exception) {
       e.printStackTrace()
-      VoidResult.Error(context.getString(R.string.framework_text_failed_reset_data))
+      throw Exception(context.getString(R.string.framework_text_failed_reset_data))
     }
   }
 }
