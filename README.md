@@ -23,7 +23,7 @@
 - Coroutine
 - RxKotlin
 - GSON Serialization
-- ZXing
+- ML Kit for QR code scanning
 - MPAndroidChart
 - Gradle build flavors
 - BuildSrc + Kotlin DSL
