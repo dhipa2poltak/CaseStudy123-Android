@@ -10,6 +10,14 @@
       android:name="com.dpfht.android.casestudy123.feature_home.HomeFragment" />
 
   <fragment
+      android:id="@+id/qrCodeScannerFragment"
+      android:name="com.dpfht.android.feature_qr_code_scanner.QRCodeScannerFragment">
+
+    <deepLink
+        app:uri="android-app://com.dpfht.android.casestudy123/qr_code_scanner_fragment" />
+  </fragment>
+
+  <fragment
       android:id="@+id/qrisHistoryFragment"
       android:name="com.dpfht.android.casestudy123.feature_qris.history.QRISHistoryFragment">
 

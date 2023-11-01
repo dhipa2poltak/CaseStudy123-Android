@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="qr_code_reader_square">#FFFFFFFF</color>
+  <color name="dim_background">#52000000</color>
+</resources>

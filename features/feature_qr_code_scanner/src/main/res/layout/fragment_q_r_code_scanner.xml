@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_root"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context=".QRCodeScannerFragment">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/preview_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fl_frame"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:background="@drawable/qr_code_reader_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fl_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/dim_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_frame"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fl_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/dim_background"
+        app:layout_constraintStart_toEndOf="@+id/fl_frame"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fl_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/dim_background"
+        app:layout_constraintStart_toEndOf="@+id/fl_left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fl_right"
+        app:layout_constraintBottom_toTopOf="@+id/fl_frame"/>
+
+    <FrameLayout
+        android:id="@+id/fl_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/dim_background"
+        app:layout_constraintStart_toEndOf="@+id/fl_left"
+        app:layout_constraintTop_toBottomOf="@+id/fl_frame"
+        app:layout_constraintEnd_toStartOf="@+id/fl_right"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

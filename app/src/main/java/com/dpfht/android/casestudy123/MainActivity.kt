@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     navController.addOnDestinationChangedListener { _, destination, _ ->
       title = when (destination.id) {
         R.id.homeFragment -> "${getString(R.string.app_name)}${getString(R.string.running_mode)}"
+        R.id.qrCodeScannerFragment -> resources.getString(R.string.app_text_scan_a_qr_code)
         R.id.qrisHistoryFragment -> resources.getString(R.string.app_text_history)
         R.id.portofolioFragment -> resources.getString(R.string.app_text_chart)
         else -> "${getString(R.string.app_name)}${getString(R.string.running_mode)}"

@@ -19,6 +19,18 @@ class NavigationServiceImpl(
     navController.graph = navGraph
   }
 
+  override fun navigateToQRCodeScannerForResult() {
+    val builder = Uri.Builder()
+    builder.scheme("android-app")
+      .authority("com.dpfht.android.casestudy123")
+      .appendPath("qr_code_scanner_fragment")
+
+    navController.navigate(
+      NavDeepLinkRequest.Builder
+        .fromUri(builder.build())
+        .build())
+  }
+
   override fun navigateToQRISTransaction(qrCode: String, onDoneCallback: (() -> Unit)?) {
     val fragment = QRISTransactionFragment.newInstance()
     fragment.qrCode = qrCode
@@ -62,5 +74,9 @@ class NavigationServiceImpl(
       NavDeepLinkRequest.Builder
         .fromUri(builder.build())
         .build())
+  }
+
+  override fun navigateUp() {
+    navController.navigateUp()
   }
 }

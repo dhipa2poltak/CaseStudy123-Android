@@ -1,0 +1,10 @@
+<resources>
+  <string name="msg_please_allow">Mohon Izinkan</string>
+  <string name="msg_permission_camera">Izin diperlukan untuk mengakses kamera.</string>
+  <string name="text_ok">Oke</string>
+
+  <string name="text_title_perm">Perhatian</string>
+  <string name="msg_not_granted">CaseStudy123 tidak dizinkan untuk mengakses kamera.</string>
+  <string name="text_close">Tutup</string>
+  <string name="text_open_settings">Buka Pengaturan</string>
+</resources>

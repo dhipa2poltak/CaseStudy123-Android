@@ -30,9 +30,12 @@ object Versions {
 
   const val swipeRefreshLayout = "1.0.0"
   const val MPAndroidChart = "v3.1.0"
-  const val zxingEmbedded = "4.3.0"
-  const val zxingCore = "3.3.0"
 
   const val rxKotlin = "3.0.1"
   const val rxAndroid = "3.0.1"
+
+  const val mlKitBarCodeScanning = "17.2.0"
+  const val camera2 = "1.2.1"
+  const val cameraLifecycle = "1.2.1"
+  const val cameraView = "1.2.1"
 }

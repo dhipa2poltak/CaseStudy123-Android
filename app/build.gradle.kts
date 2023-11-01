@@ -81,6 +81,7 @@ dependencies {
   implementation(project(":features:feature_splash"))
   implementation(project(":features:feature_error_message"))
   implementation(project(":features:feature_home"))
+  implementation(project(":features:feature_qr_code_scanner"))
   implementation(project(":features:feature_qris"))
   implementation(project(":features:feature_portofolio"))
 

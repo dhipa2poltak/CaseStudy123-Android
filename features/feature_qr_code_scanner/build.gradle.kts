@@ -6,11 +6,12 @@ plugins {
 }
 
 android {
-  namespace = "com.dpfht.android.casestudy123.feature_home"
+  namespace = "com.dpfht.android.feature_qr_code_scanner"
   compileSdk = ConfigData.compileSdkVersion
 
   defaultConfig {
     minSdk = ConfigData.minSdkVersion
+    vectorDrawables.useSupportLibrary = true
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
@@ -37,7 +38,6 @@ android {
 
 dependencies {
 
-  implementation(project(":domain"))
   implementation(project(":framework"))
 
   implementation(Deps.coreKtx)
@@ -53,5 +53,9 @@ dependencies {
   implementation(Deps.fragmentKtx)
   implementation(Deps.lifecycleViewModel)
 
-  implementation(Deps.swipeRefreshLayout)
+  implementation(Deps.mlKitBarCodeScanning)
+
+  implementation(Deps.camera2)
+  implementation(Deps.cameraLifecycle)
+  implementation(Deps.cameraView)
 }

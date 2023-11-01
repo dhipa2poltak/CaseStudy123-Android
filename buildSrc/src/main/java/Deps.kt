@@ -30,9 +30,11 @@ object Deps {
   const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
   const val MPAndroidChart = "com.github.PhilJay:MPAndroidChart:${Versions.MPAndroidChart}"
 
-  const val zxingEmbedded = "com.journeyapps:zxing-android-embedded:${Versions.zxingEmbedded}"
-  const val zxingCore = "com.google.zxing:core:${Versions.zxingCore}"
-
   const val rxKotlin = "io.reactivex.rxjava3:rxkotlin:${Versions.rxKotlin}"
   const val rxAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid}"
+
+  const val mlKitBarCodeScanning = "com.google.mlkit:barcode-scanning:${Versions.mlKitBarCodeScanning}"
+  const val camera2 = "androidx.camera:camera-camera2:${Versions.camera2}"
+  const val cameraLifecycle = "androidx.camera:camera-lifecycle:${Versions.cameraLifecycle}"
+  const val cameraView = "androidx.camera:camera-view:${Versions.cameraView}"
 }

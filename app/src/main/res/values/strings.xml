@@ -1,4 +1,5 @@
 <resources>
   <string name="app_text_history">Riwayat</string>
   <string name="app_text_chart">Portofolio (Chart)</string>
+  <string name="app_text_scan_a_qr_code">Scan a QR Code</string>
 </resources>
