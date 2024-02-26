@@ -75,15 +75,8 @@ android {
 
 dependencies {
 
-  implementation(project(":domain"))
-  implementation(project(":data"))
   implementation(project(":framework"))
-  implementation(project(":features:feature_splash"))
-  implementation(project(":features:feature_error_message"))
-  implementation(project(":features:feature_home"))
-  implementation(project(":features:feature_qr_code_scanner"))
-  implementation(project(":features:feature_qris"))
-  implementation(project(":features:feature_portofolio"))
+  implementation(project(":navigation"))
 
   implementation(Deps.coreKtx)
   implementation(Deps.appCompat)

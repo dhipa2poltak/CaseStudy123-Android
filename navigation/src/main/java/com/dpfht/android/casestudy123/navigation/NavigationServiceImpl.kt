@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
-import com.dpfht.android.casestudy123.R
 import com.dpfht.android.casestudy123.feature_qris.transaction.QRISTransactionFragment
 import com.dpfht.android.casestudy123.framework.Constants
 import com.dpfht.android.casestudy123.framework.navigation.NavigationService
