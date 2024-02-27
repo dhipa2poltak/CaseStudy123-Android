@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.entity.Result.Error
 import com.dpfht.casestudy123.domain.entity.VoidResult
 import com.dpfht.casestudy123.domain.usecase.GetBalanceUseCase
 import com.dpfht.casestudy123.domain.usecase.ResetAllDataUseCase
@@ -38,7 +39,7 @@ class HomeViewModel @Inject constructor(
         is Result.Success -> {
           onSuccessGetBalance(result.value.balance)
         }
-        is Result.ErrorResult -> {
+        is Error -> {
           onErrorGetBalance(result.message)
         }
       }

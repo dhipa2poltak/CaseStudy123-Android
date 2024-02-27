@@ -1,5 +1,6 @@
 package com.dpfht.casestudy123.domain.usecase
 
+import com.dpfht.casestudy123.domain.entity.AppException
 import com.dpfht.casestudy123.domain.entity.QRCodeEntity
 import com.dpfht.casestudy123.domain.entity.QRISTransactionState
 import com.dpfht.casestudy123.domain.entity.Result
@@ -25,8 +26,8 @@ class PostQRISTransactionUseCaseImpl(
       appRepository.postQRISTransaction(balanceEntity.copy(balance = newBalance), qrEntity)
 
       return Result.Success(QRISTransactionState.Success(newBalance))
-    } catch (e: Exception) {
-      return Result.ErrorResult(e.message ?: "")
+    } catch (e: AppException) {
+      return Result.Error(e.message)
     }
   }
 }

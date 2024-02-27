@@ -1,5 +1,6 @@
 package com.dpfht.casestudy123.domain.usecase
 
+import com.dpfht.casestudy123.domain.entity.AppException
 import com.dpfht.casestudy123.domain.entity.VoidResult
 import com.dpfht.casestudy123.domain.repository.AppRepository
 
@@ -12,8 +13,8 @@ class ResetAllDataUseCaseImpl(
       appRepository.resetAllData()
 
       VoidResult.Success
-    } catch (e: Exception) {
-      VoidResult.Error(e.message ?: "")
+    } catch (e: AppException) {
+      VoidResult.Error(e.message)
     }
   }
 }

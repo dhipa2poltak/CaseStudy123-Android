@@ -11,6 +11,7 @@ import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDBModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.toDomain
 import com.dpfht.casestudy123.data.datasource.LocalDataSource
+import com.dpfht.casestudy123.domain.entity.AppException
 import com.dpfht.casestudy123.domain.entity.QRCodeEntity
 import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
 import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
@@ -58,7 +59,7 @@ class LocalDataSourceImpl(
         }
       } catch (e: Exception) {
         e.printStackTrace()
-        throw Exception(e.message ?: context.getString(R.string.framework_text_error_reading_file))
+        throw AppException(e.message ?: context.getString(R.string.framework_text_error_reading_file))
       } finally {
         if (reader != null) {
           try {
@@ -86,7 +87,7 @@ class LocalDataSourceImpl(
       return entity ?: throw Exception(context.getString(R.string.framework_text_error_no_balance_found))
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_failed_get_balance))
+      throw AppException(context.getString(R.string.framework_text_failed_get_balance))
     }
   }
 
@@ -122,7 +123,7 @@ class LocalDataSourceImpl(
       }
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
+      throw AppException(context.getString(R.string.framework_text_failed_post_transaction))
     }
   }
 
@@ -135,7 +136,7 @@ class LocalDataSourceImpl(
       entities
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_failed_get_transaction))
+      throw AppException(context.getString(R.string.framework_text_failed_get_transaction))
     }
   }
 
@@ -166,7 +167,7 @@ class LocalDataSourceImpl(
       }
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_failed_reset_data))
+      throw AppException(context.getString(R.string.framework_text_failed_reset_data))
     }
   }
 }

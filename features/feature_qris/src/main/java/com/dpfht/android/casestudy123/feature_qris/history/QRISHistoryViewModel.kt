@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dpfht.android.casestudy123.feature_qris.history.adapter.QRISTransactionHistoryAdapter
 import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.entity.Result.Error
 import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
 import com.dpfht.casestudy123.domain.usecase.GetAllQRISTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +40,7 @@ class QRISHistoryViewModel @Inject constructor(
         is Result.Success -> {
           onSuccessGetAllQRISTransaction(result.value)
         }
-        is Result.ErrorResult -> {
+        is Error -> {
           onErrorGetAllQRISTransaction(result.message)
         }
       }

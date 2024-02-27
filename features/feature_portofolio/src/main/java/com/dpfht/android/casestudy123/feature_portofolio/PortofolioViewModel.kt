@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.entity.Result.Error
 import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
 import com.dpfht.casestudy123.domain.usecase.GetPortofoliosUseCase
 import com.github.mikephil.charting.data.PieEntry
@@ -36,7 +37,7 @@ class PortofolioViewModel @Inject constructor(
         is Result.Success -> {
           onSuccessGetPortofolios(result.value)
         }
-        is Result.ErrorResult -> {
+        is Error -> {
           onErrorGetPortofolios(result.message)
         }
       }

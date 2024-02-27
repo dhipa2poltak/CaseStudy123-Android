@@ -10,4 +10,9 @@ java {
 
 dependencies {
   implementation(Deps.rxKotlin)
+
+  testImplementation(Deps.jUnit)
+  testImplementation(Deps.mockitoKotlin)
+  testImplementation(Deps.mockitoInline)
+  testImplementation(Deps.coroutinesTest)
 }

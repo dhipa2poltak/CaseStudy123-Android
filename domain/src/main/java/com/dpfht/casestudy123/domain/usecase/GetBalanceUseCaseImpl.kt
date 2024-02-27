@@ -1,5 +1,6 @@
 package com.dpfht.casestudy123.domain.usecase
 
+import com.dpfht.casestudy123.domain.entity.AppException
 import com.dpfht.casestudy123.domain.entity.Result
 import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
 import com.dpfht.casestudy123.domain.repository.AppRepository
@@ -11,8 +12,8 @@ class GetBalanceUseCaseImpl(
   override suspend operator fun invoke(): Result<BalanceEntity> {
     return try {
       Result.Success(appRepository.getBalance())
-    } catch (e: Exception) {
-      Result.ErrorResult(e.message ?: "")
+    } catch (e: AppException) {
+      Result.Error(e.message)
     }
   }
 }
