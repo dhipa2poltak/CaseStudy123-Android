@@ -1,4 +1,4 @@
-package com.dpfht.android.casestudy123.framework.di
+package com.dpfht.android.casestudy123.framework.di.module
 
 import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
 import com.dpfht.casestudy123.domain.repository.AppRepository

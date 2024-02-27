@@ -1,4 +1,4 @@
-package com.dpfht.android.casestudy123.framework.di
+package com.dpfht.android.casestudy123.framework.di.module
 
 import android.content.Context
 import com.dpfht.android.casestudy123.framework.data.datasource.local.LocalDataSourceImpl
