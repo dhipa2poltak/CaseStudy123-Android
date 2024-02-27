@@ -58,10 +58,16 @@ abstract class AppDB: RoomDatabase() {
     private val rawIsDBInitialized = BehaviorSubject.createDefault(false)
     val obsIsDBInitialized: Observable<Boolean> = rawIsDBInitialized
 
-    fun getDatabase(context: Context, coroutineScope: CoroutineScope): AppDB {
+    fun getDatabase(context: Context, coroutineScope: CoroutineScope, isInMemory: Boolean = false): AppDB {
       val tempInstance = INSTANCE
       if (tempInstance != null) {
         return tempInstance
+      }
+
+      if (isInMemory) {
+        return Room
+          .inMemoryDatabaseBuilder(context, AppDB::class.java)
+          .build()
       }
 
       synchronized(this) {
