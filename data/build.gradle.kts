@@ -15,4 +15,9 @@ dependencies {
   implementation(Deps.rxKotlin)
 
   implementation(Deps.annotation)
+
+  testImplementation(Deps.jUnit)
+  testImplementation(Deps.mockitoKotlin)
+  testImplementation(Deps.mockitoInline)
+  testImplementation(Deps.coroutinesTest)
 }
