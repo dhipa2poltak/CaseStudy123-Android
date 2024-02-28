@@ -35,9 +35,11 @@ class LocalDataSourceImpl(
 ): LocalDataSource {
 
   init {
-    GlobalScope.launch(Dispatchers.IO) {
-      appDB.balanceDao().getBalance("balance")
-    }
+    try {
+      GlobalScope.launch(Dispatchers.IO) {
+        appDB.balanceDao().getBalance("balance")
+      }
+    } catch (_: Exception) {}
   }
 
   override fun getStreamIsDBInitialized(): Observable<Boolean> {
@@ -64,9 +66,7 @@ class LocalDataSourceImpl(
         if (reader != null) {
           try {
             reader.close()
-          } catch (e: IOException) {
-            e.printStackTrace()
-          }
+          } catch (_: IOException) {}
         }
       }
 
