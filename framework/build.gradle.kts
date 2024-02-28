@@ -34,6 +34,7 @@ android {
   kotlinOptions {
     jvmTarget = ConfigData.jvmTargetVersion
   }
+  testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 dependencies {

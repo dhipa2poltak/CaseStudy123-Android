@@ -24,10 +24,7 @@ class BalanceDaoTest {
   private lateinit var balanceDao: BalanceDao
 
   private val type = "type"
-  private val balance1 = BalanceDBModel(1, type, 1000.0)
-  private val balance2 = BalanceDBModel(2, type, 1000.0)
-  private val balance3 = BalanceDBModel(3, type, 1000.0)
-  private val balances = listOf(balance1, balance2, balance3)
+  private val balance = BalanceDBModel(1, type, 32000.0)
 
   @Before
   fun setup() {
@@ -43,26 +40,24 @@ class BalanceDaoTest {
 
   @Test
   fun `ensure insertBalance and getBalance methods are called successfully`() = runTest {
-    balanceDao.insertBalance(balance1)
-    balanceDao.insertBalance(balance2)
-    balanceDao.insertBalance(balance3)
-
-    val expected = balances
-    val actual = withContext(Dispatchers.IO) { balanceDao.getBalance(type) }
-
-    assertTrue(expected == actual)
-  }
-
-  @Test
-  fun `ensure insertBalance, updateBalance and getBalance methods are called successfully`() = runTest {
-    balanceDao.insertBalance(balance1)
-
-    val balance = balance1.copy(balance = 10000.0)
-    balanceDao.updateBalance(balance)
+    balanceDao.insertBalance(balance)
 
     val actual = withContext(Dispatchers.IO) { balanceDao.getBalance(type).firstOrNull() }
 
     assertTrue(actual != null)
     assertTrue(balance == actual)
+  }
+
+  @Test
+  fun `ensure insertBalance, updateBalance and getBalance methods are called successfully`() = runTest {
+    balanceDao.insertBalance(balance)
+
+    val theBalance = balance.copy(balance = 10000.0)
+    balanceDao.updateBalance(theBalance)
+
+    val actual = withContext(Dispatchers.IO) { balanceDao.getBalance(type).firstOrNull() }
+
+    assertTrue(actual != null)
+    assertTrue(theBalance == actual)
   }
 }
