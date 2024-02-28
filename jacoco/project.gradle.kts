@@ -79,7 +79,9 @@ project.afterEvaluate {
             "**/*Adapter*.*",
             "**/TheApplication*.*",
             "**/framework/Config.*",
-            "**/analyzer/*"
+            "**/analyzer/*",
+            "**/framework/commons/model/*",
+            "**/feature_home/model/*"
         )
 
         val jClasses = arrayListOf<String>()
