@@ -48,7 +48,6 @@ dependencies {
   testImplementation(Deps.mockitoKotlin)
   testImplementation(Deps.mockitoInline)
   testImplementation(Deps.coreTesting)
-  testImplementation(Deps.robolectric)
   androidTestImplementation(Deps.jUnitExt)
   androidTestImplementation(Deps.espresso)
 
