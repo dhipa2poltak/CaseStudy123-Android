@@ -44,6 +44,11 @@ dependencies {
   implementation(Deps.appCompat)
   implementation(Deps.material)
   testImplementation(Deps.jUnit)
+  testImplementation(Deps.coroutinesTest)
+  testImplementation(Deps.mockitoKotlin)
+  testImplementation(Deps.mockitoInline)
+  testImplementation(Deps.coreTesting)
+  testImplementation(Deps.robolectric)
   androidTestImplementation(Deps.jUnitExt)
   androidTestImplementation(Deps.espresso)
 
