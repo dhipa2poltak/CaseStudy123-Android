@@ -36,6 +36,15 @@ class NavigationServiceTest {
   }
 
   @Test
+  fun `ensure supportFragmentManager is retrieved in Activity when calling navigateToQRISTransaction method in navigationService`() {
+    try {
+      navigationService.navigateToQRISTransaction("1111", null)
+    } catch (_: Exception) {}
+
+    verify(activity).supportFragmentManager
+  }
+
+  @Test
   fun `ensure navigate method is called in navController when calling navigateToQRISHistory method in navigationService`() {
     navigationService.navigateToQRISHistory()
 
