@@ -155,7 +155,8 @@ fun setupAndroidReporting(project: Project) {
             "**/framework/Config.*",
             "**/analyzer/*",
             "**/framework/commons/model/*",
-            "**/feature_home/model/*"
+            "**/feature_home/model/*",
+            "**/AppDB_Impl*.*"
         )
 
         val javaTree = (fileTree("${project.buildDir}/intermediates/javac/$sourceName/classes") { exclude(fileFilter) }).getDir().getAbsolutePath()
