@@ -92,38 +92,36 @@ class LocalDataSourceImpl(
   }
 
   override suspend fun postQRISTransaction(balanceEntity: BalanceEntity, qrEntity: QRCodeEntity) {
-    try {
-      withContext(Dispatchers.IO) {
+    withContext(Dispatchers.IO) {
+      try {
         appDB.beginTransaction()
 
-        try {
-          val newBalanceModel = BalanceDBModel(id = balanceEntity.id, type = balanceEntity.type, balance = balanceEntity.balance)
-          val count = appDB.balanceDao().updateBalance(newBalanceModel)
+        val newBalanceModel = BalanceDBModel(
+          id = balanceEntity.id,
+          type = balanceEntity.type,
+          balance = balanceEntity.balance
+        )
+        val count = appDB.balanceDao().updateBalance(newBalanceModel)
 
-          if (count > 0) {
-            val newQRISTransaction = QRISTransactionDBModel(
-              source = qrEntity.source,
-              idTransaction = qrEntity.idTransaction,
-              merchantName = qrEntity.merchantName,
-              nominal = qrEntity.nominal,
-              transactionDateTime = Calendar.getInstance().time
-            )
-            appDB.qrisTransactionDao().insertQRISTransaction(newQRISTransaction)
+        if (count > 0) {
+          val newQRISTransaction = QRISTransactionDBModel(
+            source = qrEntity.source,
+            idTransaction = qrEntity.idTransaction,
+            merchantName = qrEntity.merchantName,
+            nominal = qrEntity.nominal,
+            transactionDateTime = Calendar.getInstance().time
+          )
+          appDB.qrisTransactionDao().insertQRISTransaction(newQRISTransaction)
 
-            appDB.setTransactionSuccessful()
-          } else {
-            throw Exception(context.getString(R.string.framework_text_failed_update_balance))
-          }
-        } catch (e: Exception) {
-          e.printStackTrace()
-          throw Exception(context.getString(R.string.framework_text_failed_post_transaction))
-        } finally {
-          appDB.endTransaction()
+          appDB.setTransactionSuccessful()
+        } else {
+          throw Exception(context.getString(R.string.framework_text_failed_update_balance))
         }
+      } catch (e: Exception) {
+        throw AppException(e.message ?: context.getString(R.string.framework_text_failed_post_transaction))
+      } finally {
+        appDB.endTransaction()
       }
-    } catch (e: Exception) {
-      e.printStackTrace()
-      throw AppException(context.getString(R.string.framework_text_failed_post_transaction))
     }
   }
 
@@ -141,33 +139,27 @@ class LocalDataSourceImpl(
   }
 
   override suspend fun resetAllData() {
-    try {
-      withContext(Dispatchers.IO) {
+    withContext(Dispatchers.IO) {
+      try {
         appDB.beginTransaction()
 
-        try {
-          val balanceModel = appDB.balanceDao().getBalance("balance").firstOrNull()
-          balanceModel?.let {
-            val newBalanceModel = balanceModel.copy(balance = Constants.STARTING_BALANCE)
-            val count = appDB.balanceDao().updateBalance(newBalanceModel)
+        val balanceModel = appDB.balanceDao().getBalance("balance").firstOrNull()
+        balanceModel?.let {
+          val newBalanceModel = balanceModel.copy(balance = Constants.STARTING_BALANCE)
+          val count = appDB.balanceDao().updateBalance(newBalanceModel)
 
-            if (count > 0) {
-              appDB.qrisTransactionDao().deleteAllQRISTransaction()
-              appDB.setTransactionSuccessful()
-            } else {
-              throw Exception(context.getString(R.string.framework_text_failed_reset_balance))
-            }
+          if (count > 0) {
+            appDB.qrisTransactionDao().deleteAllQRISTransaction()
+            appDB.setTransactionSuccessful()
+          } else {
+            throw Exception(context.getString(R.string.framework_text_failed_reset_balance))
           }
-        } catch (e: Exception) {
-          e.printStackTrace()
-          throw Exception(context.getString(R.string.framework_text_failed_reset_data))
-        } finally {
-          appDB.endTransaction()
         }
+      } catch (e: Exception) {
+        throw AppException(e.message ?: context.getString(R.string.framework_text_failed_reset_data))
+      } finally {
+        appDB.endTransaction()
       }
-    } catch (e: Exception) {
-      e.printStackTrace()
-      throw AppException(context.getString(R.string.framework_text_failed_reset_data))
     }
   }
 }
