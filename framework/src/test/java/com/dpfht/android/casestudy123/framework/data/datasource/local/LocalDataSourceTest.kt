@@ -26,6 +26,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
@@ -95,11 +96,13 @@ class LocalDataSourceTest {
     context = mock()
     assetManager = mock()
 
-    localDataSource = LocalDataSourceImpl(context, assetManager, appDb)
-
     whenever(assetManager.open(anyString())).then {
-      throw Exception(msg)
+      throw Exception()
     }
+
+    whenever(context.getString(anyInt())).thenReturn(msg)
+
+    localDataSource = LocalDataSourceImpl(context, assetManager, appDb)
 
     var actual: String? = null
     try {
@@ -195,9 +198,22 @@ class LocalDataSourceTest {
 
   @Test
   fun `fail in calling getAllQRISTransaction method in localDataSource`() = runTest {
+    appDb.close()
+
+    context = mock()
+    assetManager = mock()
+    appDb = mock()
+
+    val balanceDao: BalanceDao = mock()
+    whenever(appDb.balanceDao()).thenReturn(balanceDao)
+    whenever(balanceDao.getBalance("balance")).thenReturn(listOf(balanceModel))
     whenever(appDb.qrisTransactionDao()).then {
       throw Exception()
     }
+
+    whenever(context.getString(anyInt())).thenReturn(msg)
+
+    localDataSource = LocalDataSourceImpl(context, assetManager, appDb)
 
     var actual: String? = null
     try {
@@ -207,7 +223,7 @@ class LocalDataSourceTest {
     }
 
     assertTrue(actual != null)
-    assertTrue(actual?.isNotEmpty() == true)
+    assertTrue(msg == actual)
   }
 
   @Test
@@ -229,10 +245,20 @@ class LocalDataSourceTest {
 
   @Test
   fun `fail in calling resetAllData method in localDataSource`() = runTest {
+    appDb.close()
+
+    context = mock()
+    assetManager = mock()
+    appDb = mock()
+
     val balanceDao: BalanceDao = mock()
     whenever(appDb.balanceDao()).thenReturn(balanceDao)
     whenever(balanceDao.getBalance("balance")).thenReturn(listOf(balanceModel))
     whenever(balanceDao.updateBalance(any())).thenReturn(0)
+
+    whenever(context.getString(anyInt())).thenReturn(msg)
+
+    localDataSource = LocalDataSourceImpl(context, assetManager, appDb)
 
     var actual: String? = null
     try {
@@ -242,6 +268,6 @@ class LocalDataSourceTest {
     }
 
     assertTrue(actual != null)
-    assertTrue(actual?.isNotEmpty() == true)
+    assertTrue(msg == actual)
   }
 }

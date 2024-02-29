@@ -61,7 +61,7 @@ class LocalDataSourceImpl(
         }
       } catch (e: Exception) {
         e.printStackTrace()
-        throw AppException(e.message ?: context.getString(R.string.framework_text_error_reading_file))
+        throw AppException(context.getString(R.string.framework_text_error_reading_file))
       } finally {
         if (reader != null) {
           try {
