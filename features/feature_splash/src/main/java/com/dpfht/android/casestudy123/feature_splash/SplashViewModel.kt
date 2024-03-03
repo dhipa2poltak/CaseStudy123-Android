@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor(
   private val _isInitializationDone = MutableLiveData<Boolean>()
   val isInitializationDone: LiveData<Boolean> = _isInitializationDone
 
-  private var isDelayDone = false
+  var isDelayDone = false
   private var isInitDBDone = false
 
   private val compositeDisposable = CompositeDisposable()

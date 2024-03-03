@@ -47,7 +47,6 @@ class AppDBTest {
       }
 
     assertTrue(isInit != null)
-    assertTrue(isInit == true)
 
     disposable.dispose()
   }

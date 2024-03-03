@@ -24,6 +24,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
     viewModel.isInitializationDone.observe(viewLifecycleOwner) { isDone ->
       if (isDone) {
         navigationService.navigateToHome()
+      } else if (viewModel.isDelayDone) {
+        binding.tvLoading.text = requireContext().resources.getString(R.string.splash_init_db)
       }
     }
   }
