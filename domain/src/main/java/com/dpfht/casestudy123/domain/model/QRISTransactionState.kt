@@ -1,4 +1,4 @@
-package com.dpfht.casestudy123.domain.entity
+package com.dpfht.casestudy123.domain.model
 
 
 sealed class QRISTransactionState {

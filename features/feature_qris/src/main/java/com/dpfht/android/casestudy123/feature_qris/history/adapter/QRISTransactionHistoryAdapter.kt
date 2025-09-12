@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.android.casestudy123.feature_qris.databinding.LayoutRowQrisTransactionBinding
 import com.dpfht.android.casestudy123.feature_qris.history.adapter.QRISTransactionHistoryAdapter.ViewHolder
 import com.dpfht.android.casestudy123.framework.ext.toRupiahString
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class QRISTransactionHistoryAdapter @Inject constructor(
 
 ): RecyclerView.Adapter<ViewHolder>() {
 
-  lateinit var qrisTransactionEntities: ArrayList<QRISTransactionEntity>
+  lateinit var qrisTransactionEntities: ArrayList<QRISTransaction>
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val binding = LayoutRowQrisTransactionBinding.inflate(LayoutInflater.from(parent.context), parent, false)

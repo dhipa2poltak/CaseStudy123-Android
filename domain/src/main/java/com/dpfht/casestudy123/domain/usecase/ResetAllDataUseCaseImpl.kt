@@ -1,7 +1,7 @@
 package com.dpfht.casestudy123.domain.usecase
 
-import com.dpfht.casestudy123.domain.entity.AppException
-import com.dpfht.casestudy123.domain.entity.VoidResult
+import com.dpfht.casestudy123.domain.model.AppException
+import com.dpfht.casestudy123.domain.model.VoidResult
 import com.dpfht.casestudy123.domain.repository.AppRepository
 
 class ResetAllDataUseCaseImpl(

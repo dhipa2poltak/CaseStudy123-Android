@@ -1,8 +1,8 @@
-package com.dpfht.casestudy123.domain.entity.db_entity
+package com.dpfht.casestudy123.domain.model.db
 
 import java.util.Date
 
-data class QRISTransactionEntity(
+data class QRISTransaction(
   val id: Long = 0L,
   val source: String = "",
   val idTransaction: String = "",

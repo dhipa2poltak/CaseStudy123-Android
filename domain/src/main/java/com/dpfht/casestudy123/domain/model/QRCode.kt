@@ -1,6 +1,6 @@
-package com.dpfht.casestudy123.domain.entity
+package com.dpfht.casestudy123.domain.model
 
-data class QRCodeEntity(
+data class QRCode(
   val source: String = "",
   val idTransaction: String = "",
   val merchantName: String = "",

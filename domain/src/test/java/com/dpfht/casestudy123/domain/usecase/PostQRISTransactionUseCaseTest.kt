@@ -1,10 +1,10 @@
 package com.dpfht.casestudy123.domain.usecase
 
-import com.dpfht.casestudy123.domain.entity.AppException
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
-import com.dpfht.casestudy123.domain.entity.QRISTransactionState
-import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
-import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.model.AppException
+import com.dpfht.casestudy123.domain.model.QRCode
+import com.dpfht.casestudy123.domain.model.QRISTransactionState
+import com.dpfht.casestudy123.domain.model.db.Balance
+import com.dpfht.casestudy123.domain.model.Result
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
@@ -20,7 +20,7 @@ class PostQRISTransactionUseCaseTest: BaseUseCaseTest() {
 
   private lateinit var usecase: PostQRISTransactionUseCase
 
-  private val qrCodeEntity = QRCodeEntity("source", "idTransaction", "merchantName", 12000.0)
+  private val qrCodeEntity = QRCode("source", "idTransaction", "merchantName", 12000.0)
 
   @Before
   fun setup() {
@@ -29,7 +29,7 @@ class PostQRISTransactionUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `QRIS transaction is succeeded`() = runTest {
-    val balanceEntity = BalanceEntity(1, "type", 50000.0)
+    val balanceEntity = Balance(1, "type", 50000.0)
 
     whenever(appRepository.getBalance()).thenReturn(balanceEntity)
 
@@ -43,7 +43,7 @@ class PostQRISTransactionUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `QRIS transaction is failed because the balance is zero (not enough)`() = runTest {
-    val balanceEntity = BalanceEntity(1, "type", 0.0)
+    val balanceEntity = Balance(1, "type", 0.0)
 
     whenever(appRepository.getBalance()).thenReturn(balanceEntity)
 
@@ -57,7 +57,7 @@ class PostQRISTransactionUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `QRIS transaction is failed because the balance is not enough`() = runTest {
-    val balanceEntity = BalanceEntity(1, "type", 10000.0)
+    val balanceEntity = Balance(1, "type", 10000.0)
 
     whenever(appRepository.getBalance()).thenReturn(balanceEntity)
 

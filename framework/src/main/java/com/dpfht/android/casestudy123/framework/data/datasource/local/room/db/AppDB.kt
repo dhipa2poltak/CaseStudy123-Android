@@ -8,14 +8,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dpfht.android.casestudy123.framework.Constants
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.dao.BalanceDao
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.dao.QRISTransactionDao
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDBModel
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDBModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDbModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDbModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(version = 1, entities = [BalanceDBModel::class, QRISTransactionDBModel::class], exportSchema = false)
+@Database(version = 1, entities = [BalanceDbModel::class, QRISTransactionDbModel::class], exportSchema = false)
 abstract class AppDB: RoomDatabase() {
 
   abstract fun balanceDao(): BalanceDao
@@ -47,7 +47,7 @@ abstract class AppDB: RoomDatabase() {
     }
 
     private suspend fun prePopulateDatabase(balanceDao: BalanceDao) {
-      val balanceModel = BalanceDBModel(type = "balance", balance = Constants.STARTING_BALANCE)
+      val balanceModel = BalanceDbModel(type = "balance", balance = Constants.STARTING_BALANCE)
       balanceDao.insertBalance(balanceModel)
     }
   }

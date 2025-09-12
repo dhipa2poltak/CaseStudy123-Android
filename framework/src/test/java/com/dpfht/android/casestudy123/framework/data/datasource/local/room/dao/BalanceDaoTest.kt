@@ -3,7 +3,7 @@ package com.dpfht.android.casestudy123.framework.data.datasource.local.room.dao
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.db.AppDB
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDBModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDbModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -24,7 +24,7 @@ class BalanceDaoTest {
   private lateinit var balanceDao: BalanceDao
 
   private val type = "type"
-  private val balance = BalanceDBModel(1, type, 32000.0)
+  private val balance = BalanceDbModel(1, type, 32000.0)
 
   @Before
   fun setup() {

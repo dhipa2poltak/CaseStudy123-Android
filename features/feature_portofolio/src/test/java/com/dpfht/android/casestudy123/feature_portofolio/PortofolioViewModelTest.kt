@@ -2,8 +2,8 @@ package com.dpfht.android.casestudy123.feature_portofolio
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
-import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.model.asset.TrxChart
+import com.dpfht.casestudy123.domain.model.Result
 import com.dpfht.casestudy123.domain.usecase.GetPortofoliosUseCase
 import com.github.mikephil.charting.data.PieEntry
 import kotlinx.coroutines.Dispatchers
@@ -51,10 +51,10 @@ class PortofolioViewModelTest {
 
   @Test
   fun `fetch portfolios successfully`() = runTest {
-    val trx1 = TrxChartEntity("type1", listOf())
-    val trx2 = TrxChartEntity("type2", listOf())
-    val trx3 = TrxChartEntity("type3", listOf())
-    val trx4 = TrxChartEntity("type4", listOf())
+    val trx1 = TrxChart("type1", listOf())
+    val trx2 = TrxChart("type2", listOf())
+    val trx3 = TrxChart("type3", listOf())
+    val trx4 = TrxChart("type4", listOf())
     val listOfTrx = listOf(trx1, trx2, trx3, trx4)
 
     val result = Result.Success(listOfTrx)

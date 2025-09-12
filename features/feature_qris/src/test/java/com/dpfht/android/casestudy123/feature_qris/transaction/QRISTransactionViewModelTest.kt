@@ -2,9 +2,9 @@ package com.dpfht.android.casestudy123.feature_qris.transaction
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
-import com.dpfht.casestudy123.domain.entity.QRISTransactionState
-import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.model.QRCode
+import com.dpfht.casestudy123.domain.model.QRISTransactionState
+import com.dpfht.casestudy123.domain.model.Result
 import com.dpfht.casestudy123.domain.usecase.PostQRISTransactionUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -42,7 +42,7 @@ class QRISTransactionViewModelTest {
   private lateinit var errorMessageObserver: Observer<String>
 
   private val nominal = 5000.0
-  private val qrCodeEntity = QRCodeEntity("source", "1111", "merchantName", nominal)
+  private val qrCodeEntity = QRCode("source", "1111", "merchantName", nominal)
 
   @Before
   fun setup() {

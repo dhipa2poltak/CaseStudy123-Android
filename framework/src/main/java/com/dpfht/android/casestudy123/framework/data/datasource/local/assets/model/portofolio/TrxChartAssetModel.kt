@@ -1,7 +1,7 @@
 package com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio
 
 import androidx.annotation.Keep
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
+import com.dpfht.casestudy123.domain.model.asset.TrxChart
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -15,8 +15,8 @@ data class TrxChartAssetModel(
   val data: List<TrxAssetModel>? = listOf()
 )
 
-fun TrxChartAssetModel.toDomain(): TrxChartEntity {
-  return TrxChartEntity(
+fun TrxChartAssetModel.toDomain(): TrxChart {
+  return TrxChart(
     type = this.type ?: "",
     data = this.data?.map { it.toDomain() } ?: listOf()
   )

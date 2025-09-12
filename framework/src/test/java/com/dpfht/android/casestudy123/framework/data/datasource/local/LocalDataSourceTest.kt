@@ -6,12 +6,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.dao.BalanceDao
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.db.AppDB
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDBModel
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDBModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDbModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDbModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.toDomain
 import com.dpfht.casestudy123.data.datasource.LocalDataSource
-import com.dpfht.casestudy123.domain.entity.AppException
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
+import com.dpfht.casestudy123.domain.model.AppException
+import com.dpfht.casestudy123.domain.model.QRCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -49,7 +49,7 @@ class LocalDataSourceTest {
   private lateinit var assetManager: AssetManager
   private lateinit var appDb: AppDB
 
-  private val balanceModel = BalanceDBModel(1, "balance", 32000.0)
+  private val balanceModel = BalanceDbModel(1, "balance", 32000.0)
   private val msg = "this is an error message"
 
   @Before
@@ -154,7 +154,7 @@ class LocalDataSourceTest {
     val balance = balanceModel.toDomain()
     val newBalance = balance.balance - nominal
     val theBalance = balance.copy(balance = newBalance)
-    val qrCodeEntity = QRCodeEntity("source", "1111", "merchantName", nominal)
+    val qrCodeEntity = QRCode("source", "1111", "merchantName", nominal)
 
     localDataSource.postQRISTransaction(theBalance, qrCodeEntity)
 
@@ -167,7 +167,7 @@ class LocalDataSourceTest {
   fun `fail in calling postQRISTransaction method in localDataSource`() = runTest {
     var actual: String? = null
     try {
-      val qrCodeEntity = QRCodeEntity("source", "1111", "merchantName", 5000.0)
+      val qrCodeEntity = QRCode("source", "1111", "merchantName", 5000.0)
       localDataSource.postQRISTransaction(balanceModel.toDomain(), qrCodeEntity)
     } catch (e: AppException) {
       actual = e.message
@@ -179,9 +179,9 @@ class LocalDataSourceTest {
 
   @Test
   fun `call getAllQRISTransaction method in localDataSource successfully`() = runTest {
-    val dbModel1 = QRISTransactionDBModel(1, "source", "1111", "merchantName1", 10000.0, null)
-    val dbModel2 = QRISTransactionDBModel(2, "source", "2222", "merchantName2", 20000.0, null)
-    val dbModel3 = QRISTransactionDBModel(3, "source", "3333", "merchantName3", 30000.0, null)
+    val dbModel1 = QRISTransactionDbModel(1, "source", "1111", "merchantName1", 10000.0, null)
+    val dbModel2 = QRISTransactionDbModel(2, "source", "2222", "merchantName2", 20000.0, null)
+    val dbModel3 = QRISTransactionDbModel(3, "source", "3333", "merchantName3", 30000.0, null)
 
     withContext(Dispatchers.IO) {
       val dao = appDb.qrisTransactionDao()

@@ -7,15 +7,15 @@ import com.dpfht.android.casestudy123.framework.R
 import com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio.TrxChartAssetModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio.toDomain
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.db.AppDB
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDBModel
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDBModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.BalanceDbModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDbModel
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.toDomain
 import com.dpfht.casestudy123.data.datasource.LocalDataSource
-import com.dpfht.casestudy123.domain.entity.AppException
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
-import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
+import com.dpfht.casestudy123.domain.model.AppException
+import com.dpfht.casestudy123.domain.model.QRCode
+import com.dpfht.casestudy123.domain.model.asset.TrxChart
+import com.dpfht.casestudy123.domain.model.db.Balance
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.reactivex.rxjava3.core.Observable
@@ -46,7 +46,7 @@ class LocalDataSourceImpl(
     return AppDB.obsIsDBInitialized
   }
 
-  override suspend fun getPortofolios(): List<TrxChartEntity> {
+  override suspend fun getPortofolios(): List<TrxChart> {
     return withContext(Dispatchers.IO) {
       var text = ""
 
@@ -77,7 +77,7 @@ class LocalDataSourceImpl(
     }
   }
 
-  override suspend fun getBalance(): BalanceEntity {
+  override suspend fun getBalance(): Balance {
     try {
       val entity = withContext(Dispatchers.IO) {
         val list = appDB.balanceDao().getBalance("balance").map { it.toDomain() }
@@ -91,12 +91,12 @@ class LocalDataSourceImpl(
     }
   }
 
-  override suspend fun postQRISTransaction(balanceEntity: BalanceEntity, qrEntity: QRCodeEntity) {
+  override suspend fun postQRISTransaction(balanceEntity: Balance, qrEntity: QRCode) {
     withContext(Dispatchers.IO) {
       try {
         appDB.beginTransaction()
 
-        val newBalanceModel = BalanceDBModel(
+        val newBalanceModel = BalanceDbModel(
           id = balanceEntity.id,
           type = balanceEntity.type,
           balance = balanceEntity.balance
@@ -104,7 +104,7 @@ class LocalDataSourceImpl(
         val count = appDB.balanceDao().updateBalance(newBalanceModel)
 
         if (count > 0) {
-          val newQRISTransaction = QRISTransactionDBModel(
+          val newQRISTransaction = QRISTransactionDbModel(
             source = qrEntity.source,
             idTransaction = qrEntity.idTransaction,
             merchantName = qrEntity.merchantName,
@@ -125,7 +125,7 @@ class LocalDataSourceImpl(
     }
   }
 
-  override suspend fun getAllQRISTransaction(): List<QRISTransactionEntity> {
+  override suspend fun getAllQRISTransaction(): List<QRISTransaction> {
     return try {
       val entities = withContext(Dispatchers.IO) {
         appDB.qrisTransactionDao().getAllQRISTransaction().map { it.toDomain() }

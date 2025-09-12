@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.Result.Error
-import com.dpfht.casestudy123.domain.entity.VoidResult
+import com.dpfht.casestudy123.domain.model.Result
+import com.dpfht.casestudy123.domain.model.Result.Error
+import com.dpfht.casestudy123.domain.model.VoidResult
 import com.dpfht.casestudy123.domain.usecase.GetBalanceUseCase
 import com.dpfht.casestudy123.domain.usecase.ResetAllDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

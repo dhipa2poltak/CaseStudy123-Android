@@ -1,8 +1,8 @@
 package com.dpfht.casestudy123.domain.usecase
 
-import com.dpfht.casestudy123.domain.entity.AppException
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
-import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.model.AppException
+import com.dpfht.casestudy123.domain.model.asset.TrxChart
+import com.dpfht.casestudy123.domain.model.Result
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
@@ -25,9 +25,9 @@ class GetPortofoliosUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `get portofolios successfully`() = runTest {
-    val data1 = TrxChartEntity("test1", listOf())
-    val data2 = TrxChartEntity("test2", listOf())
-    val data3 = TrxChartEntity("test3", listOf())
+    val data1 = TrxChart("test1", listOf())
+    val data2 = TrxChart("test2", listOf())
+    val data3 = TrxChart("test3", listOf())
     val datas = listOf(data1, data2, data3)
 
     whenever(appRepository.getPortofolios()).thenReturn(datas)

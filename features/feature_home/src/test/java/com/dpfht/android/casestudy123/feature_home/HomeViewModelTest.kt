@@ -2,9 +2,9 @@ package com.dpfht.android.casestudy123.feature_home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.VoidResult
+import com.dpfht.casestudy123.domain.model.db.Balance
+import com.dpfht.casestudy123.domain.model.Result
+import com.dpfht.casestudy123.domain.model.VoidResult
 import com.dpfht.casestudy123.domain.usecase.GetBalanceUseCase
 import com.dpfht.casestudy123.domain.usecase.ResetAllDataUseCase
 import kotlinx.coroutines.Dispatchers
@@ -58,7 +58,7 @@ class HomeViewModelTest {
 
   @Test
   fun `fetch balance successfully`() = runTest {
-    val balanceEntity = BalanceEntity(1, "balance", 32000.0)
+    val balanceEntity = Balance(1, "balance", 32000.0)
     val result = Result.Success(balanceEntity)
 
     whenever(getBalanceUseCase()).thenReturn(result)

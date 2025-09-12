@@ -1,6 +1,6 @@
 package com.dpfht.android.casestudy123.framework.di.module
 
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
 import com.dpfht.casestudy123.domain.repository.AppRepository
 import com.dpfht.casestudy123.domain.usecase.GetAllQRISTransactionUseCase
 import com.dpfht.casestudy123.domain.usecase.GetAllQRISTransactionUseCaseImpl
@@ -49,7 +49,7 @@ class ViewModelModule {
   }
 
   @Provides
-  fun provideQRISTransactions(): ArrayList<QRISTransactionEntity> {
+  fun provideQRISTransactions(): ArrayList<QRISTransaction> {
     return arrayListOf()
   }
 

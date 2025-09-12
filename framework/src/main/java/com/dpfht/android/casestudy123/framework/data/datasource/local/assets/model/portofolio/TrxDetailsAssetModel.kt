@@ -1,7 +1,7 @@
 package com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio
 
 import androidx.annotation.Keep
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxDetailsEntity
+import com.dpfht.casestudy123.domain.model.asset.TrxDetails
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -15,8 +15,8 @@ data class TrxDetailsAssetModel(
   val nominal: Double? = 0.0
 )
 
-fun TrxDetailsAssetModel.toDomain(): TrxDetailsEntity {
-  return TrxDetailsEntity(
+fun TrxDetailsAssetModel.toDomain(): TrxDetails {
+  return TrxDetails(
     trxDate = this.trxDate ?: "",
     nominal = this.nominal ?: 0.0
   )

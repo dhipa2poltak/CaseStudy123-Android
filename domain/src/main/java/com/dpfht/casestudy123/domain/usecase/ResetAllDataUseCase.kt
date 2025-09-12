@@ -1,6 +1,6 @@
 package com.dpfht.casestudy123.domain.usecase
 
-import com.dpfht.casestudy123.domain.entity.VoidResult
+import com.dpfht.casestudy123.domain.model.VoidResult
 
 
 interface ResetAllDataUseCase {

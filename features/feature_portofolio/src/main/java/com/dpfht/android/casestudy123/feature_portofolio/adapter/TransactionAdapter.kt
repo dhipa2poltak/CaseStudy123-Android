@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.android.casestudy123.feature_portofolio.adapter.TransactionAdapter.ViewHolder
 import com.dpfht.android.casestudy123.feature_portofolio.databinding.LayoutRowTransactionBinding
 import com.dpfht.android.casestudy123.framework.ext.toRupiahString
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxDetailsEntity
+import com.dpfht.casestudy123.domain.model.asset.TrxDetails
 
 class TransactionAdapter(
-  private val data: List<TrxDetailsEntity>
+  private val data: List<TrxDetails>
 ): RecyclerView.Adapter<ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

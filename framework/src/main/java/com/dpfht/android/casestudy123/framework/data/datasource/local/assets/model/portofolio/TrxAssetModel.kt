@@ -1,7 +1,7 @@
 package com.dpfht.android.casestudy123.framework.data.datasource.local.assets.model.portofolio
 
 import androidx.annotation.Keep
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxEntity
+import com.dpfht.casestudy123.domain.model.asset.Trx
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -18,8 +18,8 @@ data class TrxAssetModel(
   val data: List<TrxDetailsAssetModel>? = listOf()
 )
 
-fun TrxAssetModel.toDomain(): TrxEntity {
-  return TrxEntity(
+fun TrxAssetModel.toDomain(): Trx {
+  return Trx(
     label = this.label ?: "",
     percentage = this.percentage ?: "0",
     data = this.data?.map { it.toDomain() } ?: listOf()

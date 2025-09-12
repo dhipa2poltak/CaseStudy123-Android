@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dpfht.android.casestudy123.feature_qris.history.adapter.QRISTransactionHistoryAdapter
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.Result.Error
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
+import com.dpfht.casestudy123.domain.model.Result
+import com.dpfht.casestudy123.domain.model.Result.Error
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
 import com.dpfht.casestudy123.domain.usecase.GetAllQRISTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class QRISHistoryViewModel @Inject constructor(
   private val getAllQRISTransactionUseCase: GetAllQRISTransactionUseCase,
-  private val qrisTransactionEntities: ArrayList<QRISTransactionEntity>,
+  private val qrisTransactionEntities: ArrayList<QRISTransaction>,
   val adapter: QRISTransactionHistoryAdapter,
   ): ViewModel() {
 
@@ -47,7 +47,7 @@ class QRISHistoryViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccessGetAllQRISTransaction(list: List<QRISTransactionEntity>) {
+  private fun onSuccessGetAllQRISTransaction(list: List<QRISTransaction>) {
     qrisTransactionEntities.clear()
     adapter.notifyDataSetChanged()
     qrisTransactionEntities.addAll(list)

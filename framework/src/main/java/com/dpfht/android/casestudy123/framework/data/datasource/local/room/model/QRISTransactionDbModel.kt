@@ -5,12 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.converter.TypeTransmogrifier
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
 import java.util.Date
 
 @Entity(tableName = "tbl_qris_transaction")
 @TypeConverters(TypeTransmogrifier::class)
-data class QRISTransactionDBModel(
+data class QRISTransactionDbModel(
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "id")
   val id: Long? = null,
@@ -26,8 +26,8 @@ data class QRISTransactionDBModel(
   var transactionDateTime: Date?,
 )
 
-fun QRISTransactionDBModel.toDomain(): QRISTransactionEntity {
-  return QRISTransactionEntity(
+fun QRISTransactionDbModel.toDomain(): QRISTransaction {
+  return QRISTransaction(
     id = this.id ?: 0L,
     source = this.source ?: "",
     idTransaction = this.idTransaction ?: "",

@@ -3,7 +3,7 @@ package com.dpfht.android.casestudy123.framework.data.datasource.local.room.dao
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.dpfht.android.casestudy123.framework.data.datasource.local.room.db.AppDB
-import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDBModel
+import com.dpfht.android.casestudy123.framework.data.datasource.local.room.model.QRISTransactionDbModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -23,9 +23,9 @@ class QRISTransactionDaoTest {
   private lateinit var appDb: AppDB
   private lateinit var dao: QRISTransactionDao
 
-  private val dbModel1 = QRISTransactionDBModel(1, "source", "1111", "merchantName1", 10000.0, null)
-  private val dbModel2 = QRISTransactionDBModel(2, "source", "2222", "merchantName2", 20000.0, null)
-  private val dbModel3 = QRISTransactionDBModel(3, "source", "3333", "merchantName3", 30000.0, null)
+  private val dbModel1 = QRISTransactionDbModel(1, "source", "1111", "merchantName1", 10000.0, null)
+  private val dbModel2 = QRISTransactionDbModel(2, "source", "2222", "merchantName2", 20000.0, null)
+  private val dbModel3 = QRISTransactionDbModel(3, "source", "3333", "merchantName3", 30000.0, null)
   private val dbModels = listOf(dbModel1, dbModel2, dbModel3)
 
   @Before

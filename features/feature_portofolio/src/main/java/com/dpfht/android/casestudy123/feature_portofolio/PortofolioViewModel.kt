@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.Result.Error
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
+import com.dpfht.casestudy123.domain.model.Result
+import com.dpfht.casestudy123.domain.model.Result.Error
+import com.dpfht.casestudy123.domain.model.asset.TrxChart
 import com.dpfht.casestudy123.domain.usecase.GetPortofoliosUseCase
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ class PortofolioViewModel @Inject constructor(
   private val _errorMessage = MutableLiveData<String>()
   val errorMessage: LiveData<String> = _errorMessage
 
-  var trxChartEntities: List<TrxChartEntity>? = null
+  var trxChartEntities: List<TrxChart>? = null
 
   fun start() {
     getPortofolios()
@@ -44,7 +44,7 @@ class PortofolioViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccessGetPortofolios(data: List<TrxChartEntity>) {
+  private fun onSuccessGetPortofolios(data: List<TrxChart>) {
     trxChartEntities = data
     if (data.isNotEmpty()) {
       val trxChart = data[0]

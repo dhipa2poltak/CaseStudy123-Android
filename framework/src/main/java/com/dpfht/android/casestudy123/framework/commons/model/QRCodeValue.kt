@@ -1,7 +1,7 @@
 package com.dpfht.android.casestudy123.framework.commons.model
 
 import androidx.annotation.Keep
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
+import com.dpfht.casestudy123.domain.model.QRCode
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -21,8 +21,8 @@ data class QRCodeValue(
   val nominal: Double? = 0.0
 )
 
-fun QRCodeValue.toDomain(): QRCodeEntity {
-  return QRCodeEntity(
+fun QRCodeValue.toDomain(): QRCode {
+  return QRCode(
     source = this.source ?: "",
     idTransaction = this.idTransaction ?: "",
     merchantName = this.merchantName ?: "",

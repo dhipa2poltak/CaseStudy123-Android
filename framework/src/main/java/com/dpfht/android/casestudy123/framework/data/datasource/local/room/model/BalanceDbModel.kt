@@ -3,10 +3,10 @@ package com.dpfht.android.casestudy123.framework.data.datasource.local.room.mode
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
+import com.dpfht.casestudy123.domain.model.db.Balance
 
 @Entity(tableName = "tbl_balance")
-data class BalanceDBModel(
+data class BalanceDbModel(
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "id")
   val id: Long? = null,
@@ -17,8 +17,8 @@ data class BalanceDBModel(
 )
 
 
-fun BalanceDBModel.toDomain(): BalanceEntity {
-  return BalanceEntity(
+fun BalanceDbModel.toDomain(): Balance {
+  return Balance(
     id = this.id ?: 0,
     type = this.type ?: "",
     balance = this.balance ?: 0.0

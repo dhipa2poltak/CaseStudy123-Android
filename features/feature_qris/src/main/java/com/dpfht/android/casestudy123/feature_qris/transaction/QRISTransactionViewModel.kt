@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dpfht.casestudy123.domain.entity.Result
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
-import com.dpfht.casestudy123.domain.entity.QRISTransactionState
-import com.dpfht.casestudy123.domain.entity.Result.Error
+import com.dpfht.casestudy123.domain.model.Result
+import com.dpfht.casestudy123.domain.model.QRCode
+import com.dpfht.casestudy123.domain.model.QRISTransactionState
+import com.dpfht.casestudy123.domain.model.Result.Error
 import com.dpfht.casestudy123.domain.usecase.PostQRISTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class QRISTransactionViewModel @Inject constructor(
 
   var isDone = false
 
-  fun postQRISTransaction(entity: QRCodeEntity) {
+  fun postQRISTransaction(entity: QRCode) {
     viewModelScope.launch {
       when (val result = postQRISTransactionUseCase(entity)) {
         is Result.Success -> {

@@ -1,17 +1,17 @@
 package com.dpfht.casestudy123.domain.repository
 
-import com.dpfht.casestudy123.domain.entity.QRCodeEntity
-import com.dpfht.casestudy123.domain.entity.asset_entity.TrxChartEntity
-import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
+import com.dpfht.casestudy123.domain.model.QRCode
+import com.dpfht.casestudy123.domain.model.asset.TrxChart
+import com.dpfht.casestudy123.domain.model.db.Balance
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
 import io.reactivex.rxjava3.core.Observable
 
 interface AppRepository {
 
-  suspend fun getPortofolios(): List<TrxChartEntity>
+  suspend fun getPortofolios(): List<TrxChart>
   fun getStreamIsDBInitialized(): Observable<Boolean>
-  suspend fun getBalance(): BalanceEntity
-  suspend fun postQRISTransaction(balanceEntity: BalanceEntity, qrEntity: QRCodeEntity)
-  suspend fun getAllQRISTransaction(): List<QRISTransactionEntity>
+  suspend fun getBalance(): Balance
+  suspend fun postQRISTransaction(balanceEntity: Balance, qrEntity: QRCode)
+  suspend fun getAllQRISTransaction(): List<QRISTransaction>
   suspend fun resetAllData()
 }

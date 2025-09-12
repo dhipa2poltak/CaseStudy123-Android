@@ -1,8 +1,8 @@
 package com.dpfht.casestudy123.domain.usecase
 
-import com.dpfht.casestudy123.domain.entity.AppException
-import com.dpfht.casestudy123.domain.entity.db_entity.BalanceEntity
-import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.model.AppException
+import com.dpfht.casestudy123.domain.model.db.Balance
+import com.dpfht.casestudy123.domain.model.Result
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
@@ -25,7 +25,7 @@ class GetBalanceUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `get balance successfully`() = runTest {
-    val balance = BalanceEntity(1, "", 100000.0)
+    val balance = Balance(1, "", 100000.0)
 
     whenever(appRepository.getBalance()).thenReturn(balance)
 

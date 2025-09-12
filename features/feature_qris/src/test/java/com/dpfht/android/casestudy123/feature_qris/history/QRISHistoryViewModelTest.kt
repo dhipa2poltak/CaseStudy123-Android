@@ -3,8 +3,8 @@ package com.dpfht.android.casestudy123.feature_qris.history
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.android.casestudy123.feature_qris.history.adapter.QRISTransactionHistoryAdapter
-import com.dpfht.casestudy123.domain.entity.db_entity.QRISTransactionEntity
-import com.dpfht.casestudy123.domain.entity.Result
+import com.dpfht.casestudy123.domain.model.db.QRISTransaction
+import com.dpfht.casestudy123.domain.model.Result
 import com.dpfht.casestudy123.domain.usecase.GetAllQRISTransactionUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,7 +45,7 @@ class QRISHistoryViewModelTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
-  private val qrisTransactionEntities = ArrayList<QRISTransactionEntity>()
+  private val qrisTransactionEntities = ArrayList<QRISTransaction>()
 
   @Before
   fun setup() {
@@ -55,9 +55,9 @@ class QRISHistoryViewModelTest {
 
   @Test
   fun `fetch QRIS transactions successfully`() = runTest {
-    val qrisTransaction1 = QRISTransactionEntity(1, "source", "1111", "name1", 1000.0, null)
-    val qrisTransaction2 = QRISTransactionEntity(2, "source", "2222", "name2", 2000.0, null)
-    val qrisTransaction3 = QRISTransactionEntity(3, "source", "3333", "name3", 3000.0, null)
+    val qrisTransaction1 = QRISTransaction(1, "source", "1111", "name1", 1000.0, null)
+    val qrisTransaction2 = QRISTransaction(2, "source", "2222", "name2", 2000.0, null)
+    val qrisTransaction3 = QRISTransaction(3, "source", "3333", "name3", 3000.0, null)
     val listTransaction = listOf(qrisTransaction1, qrisTransaction2, qrisTransaction3)
 
     val result = Result.Success(listTransaction)
